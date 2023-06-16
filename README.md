@@ -29,6 +29,9 @@ pip install -r requirements.txt
 - create folder kitti360/ at the project root directory
 - You only need one KITTI sequence, from [KITTI-360 dataset](https://www.cvlibs.net/datasets/kitti-360/download.php), download its Vechicle Poses (cam0_to_world.txt, poses.txt), and Perspective Images. 
 
+#### Rosbag from our real-world captures
+(to add)
+
 The kitti360 folder should be arranged as follows:
 ```
 kitti360   
