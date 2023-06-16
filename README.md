@@ -5,7 +5,7 @@
 [Zhi-Hao Lin](https://zhihao-lin.github.io),
 [Albert Zhai](https://ajzhai.github.io),
 [Hang Cui](https://hangpersonal.com),
-[David Forsyth](http://luthuli.cs.uiuc.edu/~daf/)
+[David Forsyth](http://luthuli.cs.uiuc.edu/~daf/),
 [Shenlong Wang](https://shenlong.web.illinois.edu/)<br/>
 Unversity of Illinois at Urbana-Champaign
 
