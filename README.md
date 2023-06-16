@@ -9,6 +9,7 @@
 [Shenlong Wang](https://shenlong.web.illinois.edu/)<br/>
 Unversity of Illinois at Urbana-Champaign
 
+(* denotes equal contribution)
 [Project link](https://sim-on-wheels.github.io/) | [Paper link](https://arxiv.org/abs/2306.08807)
 
 ### Installment
