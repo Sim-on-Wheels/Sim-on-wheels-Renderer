@@ -48,4 +48,4 @@ To run sim-on-wheels renderer on KITTI-360 sequences:
 python kitti360.py
 ```
 
-You can change this configuration file (configs/kitti360.yaml), to specify agent transform, movement, and agent types.  
+You can change this configuration file (configs/kitti360.yaml), to specify agent transform, movement, trigger conditions and agent types.  
