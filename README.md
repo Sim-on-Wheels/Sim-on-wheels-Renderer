@@ -1,4 +1,15 @@
-# Sim-on-wheels-Renderer
+# Sim-on-Wheels: Physical World in the Loop Simulation for Self-Driving (Renderer)
+
+[Yuan Shen<sup>*</sup>](https://yshen47.github.io/),
+[Bhargav Chandaka<sup>*</sup>](https://bchandaka.github.io),
+[Zhi-Hao Lin](https://zhihao-lin.github.io),
+[Albert Zhai](https://ajzhai.github.io),
+[Hang Cui](https://hangpersonal.com),
+[David Forsyth](http://luthuli.cs.uiuc.edu/~daf/)
+[Shenlong Wang](https://shenlong.web.illinois.edu/)<br/>
+Unversity of Illinois at Urbana-Champaign
+
+[Project link](https://sim-on-wheels.github.io/) | [Paper link](https://arxiv.org/abs/2306.08807)
 
 ### Installment
 Python environment: 3.9.12
