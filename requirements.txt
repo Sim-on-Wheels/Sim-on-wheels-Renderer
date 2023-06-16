@@ -1,0 +1,12 @@
+moderngl==5.7.2
+moderngl-window==2.4.2
+pygame==2.1.2
+omegaconf==2.0.0
+PyGLM
+pvlib
+utm
+tqdm
+opencv-python
+trimesh
+matplotlib
+pywavefront
