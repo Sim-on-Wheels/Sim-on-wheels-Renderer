@@ -1,0 +1,59 @@
+mode: production
+target_frame_rate: 100
+shadow_constant: 1
+device: mps
+display: pygame2
+use_depth_occlusion: False
+window_size: [640, 360]
+
+
+light_config:
+  direction: [1.0, 1.0, -0.2] # it will be normalized during postprocessing
+  color: [1.0, 1.0, 1.0] # rgb
+  intensity_config:
+    ambient: 0.7
+    diffuse: 0.8
+    specular: 1.0
+  gamma_correction_coefficient: 1.0
+  shadow_poisson_sampling_denominator: 700.0
+  shadow_intensity: 0.122 # to adjust shadow contrast
+
+camera_config:
+  fov: 72.0
+  near: 0.1
+  far: 100.0
+
+scenario_configs:
+  world:
+    scenario_transform: [ [ 1.0, 0.0, 0.0, 0.0 ], [ 0.0, 1.0, 0.0, -1.8 ], [ 0.0, 0.0, 1.0, 0.0 ], [ 0.0, 0.0, 0.0, 1.0 ] ]
+
+  intersection:
+    is_activated: True
+    npc_trajectory_type: turn_left   #choose from ["turn_left", "go_straight"]
+    scenario_transform: [ [ 1.0, 0.0, 0.0, 80.0 ], [ 0.0, 1.0, 0.0, -1.8 ], [ 0.0, 0.0, 1.0, -6.0 ], [ 0.0, 0.0, 0.0, 1.0 ] ]
+    vehicle_type: suv
+
+  jaywalking:
+    is_activated: False
+    scenario_transform: [ [ 1.0, 0.0, 0.0, 5.0 ], [ 0.0, 1.0, 0.0, -1.8 ], [ 0.0, 0.0, 1.0, -6.0 ], [ 0.0, 0.0, 0.0, 1.0 ] ]
+    actor_configs:
+      agent_0:
+        animation_type: male_running_still
+        trajectory_type: pedestrian_running
+        relative_transform_origin: [ [ 1.0, 0.0, 0.0, 0.0 ], [ 0.0, 1.0, 0.0, 0.0 ], [ 0.0, 0.0, 1.0, 0.0 ], [ 0.0, 0.0, 0.0, 1.0 ] ]
+
+  static_objects:
+    is_activated: True
+    scenario_transform: [ [ 1.0, 0.0, 0.0, 40.0 ], [ 0.0, 1.0, 0.0, -1.8 ], [ 0.0, 0.0, 1.0, -6.0 ], [ 0.0, 0.0, 0.0, 1.0 ] ]
+    object_configs:
+      object_0:
+        object_type: cone
+        relative_transform_origin: [ [ 1.0, 0.0, 0.0, 0.0 ], [ 0.0, 1.0, 0.0, 0.0 ], [ 0.0, 0.0, 1.0, 0.0 ], [ 0.0, 0.0, 0.0, 1.0 ] ]
+
+      object_1:
+        object_type: chair
+        relative_transform_origin: [ [ 1.0, 0.0, 0.0, 0.0 ], [ 0.0, 1.0, 0.0, 0.0 ], [ 0.0, 0.0, 1.0, 0.0 ], [ 0.0, 0.0, 0.0, 1.0 ] ]
+
+      object_2:
+        object_type: chair
+        relative_transform_origin: [ [ 1.0, 0.0, 0.0, 0.0 ], [ 0.0, 1.0, 0.0, 0.0 ], [ 0.0, 0.0, 1.0, 0.0 ], [ 0.0, 0.0, 0.0, 1.0 ] ]

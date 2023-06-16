@@ -1,0 +1,46 @@
+mode: debug
+target_frame_rate: 100
+shadow_constant: 1
+device: cpu
+display: pygame2
+use_depth_occlusion: False
+window_size: [640, 360]
+
+
+light_config:
+  direction: [0.0, 1.0, -0.2] # it will be normalized during postprocessing
+  color: [0.6, 0.8, 1.0] # rgb
+  intensity_config:
+    light: 5.0
+    ambient: 1.5
+    shadow: 0.02
+  shadow_poisson_sampling_denominator: 700.0
+  gamma_correction: 1.2
+
+camera_config:
+  fov: 72.0
+  near: 0.1
+  far: 100.0
+
+scenario_configs:
+  world:
+    scenario2world:
+      pos:   [0.0, -1.8, 0.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+  intersection:
+    is_activated: True
+    trigger_distance: 15
+    npc_trajectory_type: turn_left   #choose from ["turn_left", "go_straight"]
+    vehicle_type: suv
+    scenario2world:
+      pos:   [80.0, -1.8, -6.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+
+  jaywalking:
+    is_activated: False
+      
+
+  static_objects:
+    is_activated: False

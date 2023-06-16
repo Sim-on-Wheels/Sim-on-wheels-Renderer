@@ -1,0 +1,91 @@
+mode: debug
+target_frame_rate: 100
+shadow_constant: 1
+device: cpu
+display: pygame2
+use_depth_occlusion: False
+window_size: [1280, 720]
+
+
+light_config:
+  direction: [1.2, 0.4, -1.0] # it will be normalized during postprocessing
+  color: [0.6, 0.8, 1.0] # rgb
+  intensity_config:
+    light: 0.0
+    ambient: 0.9
+    shadow: 0.08
+  shadow_poisson_sampling_denominator: 700.0
+  gamma_correction: 1.0
+
+camera_config:
+  fov: 72.0
+  near: 0.1
+  far: 100.0
+
+scenario_configs:
+  world:
+    scenario2world:
+      pos:   [0.0, -1.8, 0.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+  intersection:
+    is_activated: False
+
+  jaywalking:
+    is_activated: False
+
+  static_objects:
+    is_activated: True
+    scenario2world: 
+      pos:   [55.0, -1.8, -7.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+    object_configs:
+      object_0:
+        object_type: real_yuan
+        object2scenario: 
+          pos:   [-0.1, -0.1, 0.0]
+          rot:   [0.0, -180.0, 0.0]
+          scale: [0.95, 0.95, 0.95]
+      # object_0:
+      #   object_type: real_zhihao
+      #   object2scenario: 
+      #     pos:   [-0.1, -0.1, -0.2]
+      #     rot:   [0.0, -180.0, 0.0]
+      #     scale: [1.0, 1.0, 1.0]
+      # object_0:
+      #   object_type: real_trolley
+      #   object2scenario: 
+      #     pos:   [-0.25, -0.1, -0.6]
+      #     rot:   [0.0, -142.0, 0.0]
+      #     scale: [1.0, 1.0, 1.0]
+      # object_0:
+      #   object_type: real_bench
+      #   object2scenario: 
+      #     pos:   [-0.45, -0.1, -0.12]
+      #     rot:   [0.0, -140.0, 0.0]
+      #     scale: [1.0, 1.0, 1.0]
+      # object_0:
+      #   object_type: real_ladder
+      #   object2scenario: 
+      #     pos:   [-0.45, -0.1, -0.1]
+      #     rot:   [0.0, -140.0, 0.0]
+      #     scale: [1.0, 1.0, 1.0]
+      # object_0:
+      #   object_type: real_chair_o
+      #   object2scenario: 
+      #     pos:   [-0.2, -0.1, -0.2]
+      #     rot:   [0.0, -140.0, 0.0]
+      #     scale: [1.0, 1.0, 1.0]
+      # object_0:
+      #   object_type: real_chair_b
+      #   object2scenario: 
+      #     pos:   [-0.15, -0.1, -0.45]
+      #     rot:   [0.0, -140.0, 0.0]
+      #     scale: [1.0, 1.0, 1.0]
+      # object_0:
+      #   object_type: real_cone
+      #   object2scenario: 
+      #     pos:   [-0.15, -0.05, -0.2]
+      #     rot:   [0.0, -140.0, 0.0]
+      #     scale: [0.98, 0.98, 0.98]

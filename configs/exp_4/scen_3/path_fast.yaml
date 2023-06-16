@@ -1,0 +1,75 @@
+mode: debug
+target_frame_rate: 100
+shadow_constant: 1
+device: cpu
+display: pygame2
+use_depth_occlusion: False
+window_size: [640, 360]
+
+
+light_config:
+  direction: [0.0, 1.0, -0.2] # it will be normalized during postprocessing
+  color: [0.6, 0.8, 1.0] # rgb
+  intensity_config:
+    light: 5.0
+    ambient: 1.5
+    shadow: 0.02
+  shadow_poisson_sampling_denominator: 700.0
+  gamma_correction: 1.2
+
+camera_config:
+  fov: 72.0
+  near: 0.1
+  far: 100.0
+
+scenario_configs:
+  world:
+    scenario2world:
+      pos:   [0.0, -1.8, 0.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+  intersection:
+    is_activated: False
+
+  jaywalking:
+    is_activated: True
+    trigger_distance: 20
+    scenario2world: 
+      pos:   [-5.0, -1.8, 3.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+    actor_configs:
+      actor_0:
+        animation_type: woman_running
+        object2scenario: 
+          pos:   [0.0, 0.0, 0.0]
+          rot:   [0.0, 180, 0.0]
+          scale: [1.0, 1.0, 1.0]
+      
+      actor_1:
+        animation_type: man_running
+        object2scenario: 
+          pos:   [1.0, 0.0, 0.0]
+          rot:   [0.0, 180, 0.0]
+          scale: [1.0, 1.0, 1.0]
+      
+      actor_2:
+        animation_type: lady_running
+        object2scenario: 
+          pos:   [-1.0, 0.0, 1.0]
+          rot:   [0.0, 180, 0.0]
+          scale: [1.0, 1.0, 1.0]
+
+  static_objects:
+    is_activated: False
+    scenario2world: 
+      pos:   [40.0, -1.8, -6.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+    object_configs:
+      object_0:
+        object_type: cone
+        object2scenario: 
+          pos:   [-1.0, 0.0, -1.0]
+          rot:   [0.0, 0.0, 0.0]
+          scale: [1.0, 1.0, 1.0]

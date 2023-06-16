@@ -1,0 +1,87 @@
+mode: debug
+target_frame_rate: 100
+shadow_constant: 1
+device: cpu
+display: pygame2
+use_depth_occlusion: False
+window_size: [640, 360]
+
+
+light_config:
+  direction: [0.0, 1.0, -0.2] # it will be normalized during postprocessing
+  color: [0.6, 0.8, 1.0] # rgb
+  intensity_config:
+    light: 5.0
+    ambient: 1.5
+    shadow: 0.02
+  shadow_poisson_sampling_denominator: 700.0
+  gamma_correction: 1.2
+
+camera_config:
+  fov: 72.0
+  near: 0.1
+  far: 100.0
+
+scenario_configs:
+  world:
+    scenario2world:
+      pos:   [0.0, -1.8, 0.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+  intersection:
+    is_activated: False
+
+  jaywalking:
+    is_activated: True
+    trigger_distance: 22
+    scenario2world: 
+      pos:   [0.0, -1.8, 0.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+    actor_configs:
+      actor_0:
+        animation_type: woman_walking
+        object2scenario: 
+          pos:   [4.0, 0.0, 0.0]
+          rot:   [0.0, 180, 0.0]
+          scale: [1.0, 1.0, 1.0]
+      actor_1:
+        animation_type: man_walking
+        object2scenario: 
+          pos:   [3.0, 0.0, 1.0]
+          rot:   [0.0, 180, 0.0]
+          scale: [1.0, 1.0, 1.0]
+      actor_2:
+        animation_type: lady_walking
+        object2scenario: 
+          pos:   [2.0, 0.0, 2.0]
+          rot:   [0.0, 180, 0.0]
+          scale: [1.0, 1.0, 1.0]
+
+  static_objects:
+    is_activated: True
+    scenario2world: 
+      pos:   [0.0, -1.8, 0.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+    object_configs:
+      object_0:
+        object_type: building
+        object2scenario: 
+          pos:   [5.0, 0.0, -3.0]
+          rot:   [0.0, 90.0, 0.0]
+          scale: [1.0, 1.0, 1.0]
+
+      object_1:
+        object_type: building
+        object2scenario: 
+          pos:   [10.0, 0.0, -3.0]
+          rot:   [0.0, 90.0, 0.0]
+          scale: [1.0, 1.0, 1.0]
+
+      object_2:
+        object_type: building
+        object2scenario: 
+          pos:   [15.0, 0.0, -3.0]
+          rot:   [0.0, 90.0, 0.0]
+          scale: [1.0, 1.0, 1.0]

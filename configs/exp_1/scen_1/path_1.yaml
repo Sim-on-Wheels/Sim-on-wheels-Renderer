@@ -1,0 +1,50 @@
+mode: production
+target_frame_rate: 100
+shadow_constant: 1
+device: cuda
+display: pygame2
+use_depth_occlusion: False
+window_size: [640, 360]
+
+
+light_config:
+  direction: [0.0, 1.0, -0.2] # it will be normalized during postprocessing
+  color: [0.6, 0.8, 1.0] # rgb
+  intensity_config:
+    light: 0.0
+    ambient: 1.0
+    shadow: 0.02
+  shadow_poisson_sampling_denominator: 700.0
+  gamma_correction: 1.0
+
+camera_config:
+  fov: 72.0
+  near: 0.1
+  far: 100.0
+
+scenario_configs:
+  world:
+    scenario2world:
+      pos:   [0.0, -1.8, 0.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+  
+  intersection:
+    is_activated: False
+
+  jaywalking:
+    is_activated: False
+
+  static_objects:
+    is_activated: True
+    scenario2world: 
+      pos:   [38.0, -1.8, -7.0]
+      rot:   [0.0, 0.0, 0.0]
+      scale: [1.0, 1.0, 1.0]
+    object_configs:
+      object_0:
+        object_type: chair_1
+        object2scenario: 
+          pos:   [0.0, 0.0, 0.0]
+          rot:   [0.0, 90.0, 0.0]
+          scale: [1.0, 1.0, 1.0]
