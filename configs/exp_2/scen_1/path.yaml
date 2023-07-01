@@ -13,7 +13,7 @@ light_config:
   intensity_config:
     light: 5.0
     ambient: 1.5
-    shadow: 0.02
+    shadow: 0.1
   shadow_poisson_sampling_denominator: 700.0
   gamma_correction: 1.2
 
@@ -30,7 +30,7 @@ scenario_configs:
       scale: [1.0, 1.0, 1.0]
   intersection:
     is_activated: True
-    trigger_distance: 15
+    trigger_distance: 30
     npc_trajectory_type: turn_left   #choose from ["turn_left", "go_straight"]
     vehicle_type: suv
     scenario2world:
