@@ -46,9 +46,16 @@ kitti360
 ```
 
 ### Run
-To run sim-on-wheels renderer on KITTI-360 sequences:
+#### To run sim-on-wheels renderer on KITTI-360 sequences:
 ```
 python kitti360.py
 ```
 
 You can change this configuration file (configs/kitti360.yaml), to specify agent transform, movement, trigger conditions and agent types.  
+
+#### To run sim-on-wheels renderer on real-world ROSBAG sequences:
+```
+python main.py
+```
+
+We provide different scenario configs examples in configs folder. You can load different config by changing config directory path in main.py:33. Our config yaml file can specify trigger distance condition, actor types, scenario types, and lighting related hyperparamters. 
