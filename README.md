@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 #### Scenario Assets, including pre-baked agent animations, traffic assets, and others:
 - create folder assets/ at the project root directory
-- download assets and place this folder in the asset folder: [asset link](https://uofi.box.com/s/7h7w1jazgmgu7vpcrfnoackqt07axb2q)
+- download assets and place this folder in the asset folder: [asset link with box](https://uofi.box.com/s/7h7w1jazgmgu7vpcrfnoackqt07axb2q) or [asset linke with one drive](https://1drv.ms/f/s!AvOiKE0vFTuWik9ciMHq_pIxyD3T?e=tA2B8j)
 
 #### KITTI-360
 - create folder kitti360/ at the project root directory
