@@ -22,7 +22,7 @@ def gen_random_actor_cfg(n_actors: int):
         animation_type =  str(np.random.choice(anim_types).item())
         print(animation_type)
         x_val = np.random.uniform(-10.0, 5.0) # ranges based on kitti sidewalk limits
-        z_val = np.random.uniform(3.0, 10.0)
+        z_val = np.random.uniform(4.0, 20.0)
 
         pos = [x_val, 0.0, z_val]
         if x_val < -2.5: # actor to the left of the car --> make angle so that actor faces right
@@ -56,7 +56,25 @@ def auto_gen_kitti_config(frame_start) -> DictConfig:
     return base_cfg
 
 if __name__ == '__main__':
-    for i in range(1600, 11000, 20):
+    for i in range(100, 5350, 20):
+        custom_config = auto_gen_kitti_config(frame_start=i)
+        config_cls = HIL_rendering
+        parser = mglw.create_parser()
+        config_cls.add_arguments(parser)
+        values = mglw.parse_args(args=None, parser=parser)
+        config_cls.argv = values
+        values = DEFAULT_ARGS
+        custom_run_window_config(custom_config, config_cls, values)
+    for i in range(5900, 9040, 20):
+        custom_config = auto_gen_kitti_config(frame_start=i)
+        config_cls = HIL_rendering
+        parser = mglw.create_parser()
+        config_cls.add_arguments(parser)
+        values = mglw.parse_args(args=None, parser=parser)
+        config_cls.argv = values
+        values = DEFAULT_ARGS
+        custom_run_window_config(custom_config, config_cls, values)
+    for i in range(9500, 11460, 20):
         custom_config = auto_gen_kitti_config(frame_start=i)
         config_cls = HIL_rendering
         parser = mglw.create_parser()
