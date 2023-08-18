@@ -13,7 +13,7 @@ import moderngl_window as mglw
 from dataloader_kitti360 import DataLoader
 from models.scenarios import *
 from misc.canvas import Background
-DEBUG = True
+DEBUG = False
 USE_SUNLIGHT_DIR = False
 DEFAULT_ARGS = Namespace(
         window='headless',
@@ -27,7 +27,7 @@ DEFAULT_ARGS = Namespace(
     )
 import torch
 from PIL import Image, ImageOps
-from omegaconf import OmegaConf
+from omegaconf import OmegaConf, DictConfig, ListConfig
 from matplotlib import pyplot as plt
 
 config_path = 'configs/kitti360.yaml'
@@ -101,13 +101,16 @@ class HIL_rendering(mglw.WindowConfig):
         self.background.update_texture(Image.fromarray(image_bg))
         for scenario in self.scenarios:
             scenario.update()
-
+        for scenario in self.scenarios:
+            scenario.render()
+        img_gt = self.take_screenshot()
+        img_gt.save(os.path.join(dir_origin, '{:0>5d}.png'.format(self.dataloader.start_frame + self.i)))
         self.ctx.clear(0, 0, 0)
         self.offscreen.clear()
         self.wnd.use()
         self.background.render()
-        img_origin = self.take_screenshot()
-        img_origin.save(os.path.join(dir_origin, '{:0>5d}.png'.format(self.i)))
+        # img_origin = self.take_screenshot()
+        # img_origin.save(os.path.join(dir_origin, '{:0>5d}.png'.format(self.i)))
 
         for scenario in self.scenarios:
             scenario.render()
@@ -137,9 +140,8 @@ class HIL_rendering(mglw.WindowConfig):
         composited_rgb = no_ground + shadow
         composited_rgb = torch.clip(composited_rgb, 0, 1).cpu().numpy()
         
-        img_path = os.path.join(dir_insert, '{:0>5d}.png'.format(self.i))
+        img_path = os.path.join(dir_insert, '{:0>5d}.png'.format(self.dataloader.start_frame + self.i))
         plt.imsave(img_path, composited_rgb)
-
         # render scene on window
         self.ctx.clear(0, 0, 0)
         self.wnd.use()
@@ -149,12 +151,12 @@ class HIL_rendering(mglw.WindowConfig):
         return None
 
     def render_folders(self):
-        dir_origin = os.path.join('outputs/kitti360/', self.config.name, 'origin')
+        dir_origin = os.path.join('outputs/kitti360/', self.config.name, 'gt')
         dir_insert = os.path.join('outputs/kitti360/', self.config.name, 'insert')
         os.makedirs(dir_origin, exist_ok=True)
         os.makedirs(dir_insert, exist_ok=True)
         config_path = 'configs/kitti360.yaml'
-        os.system('cp {} {}'.format(config_path, os.path.join('outputs/kitti360/', self.config.name)))
+        # os.system('cp {} {}'.format(config_path, os.path.join('outputs/kitti360/', self.config.name)))
         return dir_origin, dir_insert
 
     def get_primary_obstacle_positions(self):
@@ -165,7 +167,10 @@ class HIL_rendering(mglw.WindowConfig):
         if not self.using_ros:
             # quit if it runs out of data
             if self.i >= len(self.dataloader):
-                quit()
+                # quit()
+                # super().close()
+                # cleanup_window_config(self, self.timer)
+                return
             self.sensor_data = next(self.dataloader)
 
         self.render_single_frame(
@@ -174,8 +179,8 @@ class HIL_rendering(mglw.WindowConfig):
         self.i += 1
         if not DEBUG:
             self.clock.tick(24)
-
-        print('frame {}, FPS = {}, time: {}'.format(self.i, self.i / time, time))
+        if time != 0:
+            print('frame {}, FPS = {}, time: {}'.format(self.i, self.i / time, time))
 
     def take_screenshot(self):
         return Image.frombytes('RGB', self.window_size, self.wnd.fbo.read(), 'raw', 'RGB', 0, -1) #.show()
@@ -271,6 +276,7 @@ def setup_window_config(config_cls: mglw.WindowConfig, values: Namespace, using_
 
 def cleanup_window_config(window, timer):
     _, duration = timer.stop()
+    print("Cleanup")
     window.destroy()
     if duration > 0:
         mglw.logger.info(
@@ -279,7 +285,7 @@ def cleanup_window_config(window, timer):
             )
         )
 
-def custom_run_window_config(config_cls: mglw.WindowConfig, values: Namespace, timer=None, args=None) -> None:
+def custom_run_window_config(custom_config: DictConfig, config_cls: mglw.WindowConfig, values: Namespace, timer=None, args=None) -> None:
     """
     Initially based on from https://moderngl-window.readthedocs.io/en/latest/_modules/moderngl_window.html#run_window_config
     Run an WindowConfig entering a blocking main loop
@@ -293,12 +299,11 @@ def custom_run_window_config(config_cls: mglw.WindowConfig, values: Namespace, t
         args: Override sys.args
     """
     using_ros = False
-    custom_config = OmegaConf.load(config_path)
     window, config_obj, timer = setup_window_config(config_cls, values, using_ros, custom_config)
 
     timer.start()
 
-    while not window.is_closing:
+    while not window.is_closing and config_obj.i < len(config_obj.dataloader):
         current_time, delta = timer.next_frame()
 
         if config_obj.clear_color is not None:
@@ -310,7 +315,6 @@ def custom_run_window_config(config_cls: mglw.WindowConfig, values: Namespace, t
         window.render(current_time, delta)
         if not window.is_closing:
             window.swap_buffers()
-
     cleanup_window_config(window, timer)
 
 def ros_custom_run(config_cls: mglw.WindowConfig):
@@ -322,5 +326,6 @@ if __name__ == '__main__':
     config_cls.add_arguments(parser)
     values = mglw.parse_args(args=None, parser=parser)
     config_cls.argv = values
-    custom_run_window_config(config_cls, values)
+    custom_config = OmegaConf.load(config_path)
+    custom_run_window_config(custom_config, config_cls, values)
     # mglw.run_window_config(HIL_rendering)

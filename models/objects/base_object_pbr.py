@@ -115,7 +115,7 @@ class BaseObjectPBR(ABC):
         self.object_prog['light.ambient_intensity'].write(np.float32(self.app.light.ambient_intensity))
         self.object_prog['light.shadow_intensity'].write(np.float32(self.app.light.shadow_intensity))
         self.object_prog['light.shadow_poisson_sampling_denominator'].write(np.float32(self.app.light.shadow_poisson_sampling_denominator))
-        self.object_prog['light.gamma_correction'].write(np.float32(self.app.light.gamma_correction))
+        # self.object_prog['light.gamma_correction'].write(np.float32(self.app.light.gamma_correction))
         # shadow
         self.object_prog['m_ortho_proj'].write(self.app.camera.m_ortho_proj)
         self.object_prog['m_view_light'].write(self.app.light.m_view_light)

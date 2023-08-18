@@ -41,7 +41,8 @@ class DataLoader:
         # Time for getting sunlight, gets filled in when calculate_poses is called
         self.start_timestamp = None
         self.i = 0
-
+        self.start_frame = frame_start
+        
     def __len__(self):
         return len(self.rgbs)
 

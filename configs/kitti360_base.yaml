@@ -2,7 +2,7 @@ mode: debug
 target_frame_rate: 10
 shadow_constant: 1
 device: cpu
-display: headless
+display: pygame2
 use_depth_occlusion: False
 window_size:  [1408, 376]
 name: '1578-1598-ped-cone2'
@@ -53,19 +53,19 @@ scenario_configs:
       actor_0:
         animation_type: woman_walking
         object2scenario: 
-          pos:   [-4.0, 0.0, 5.0]
+          pos:   [-1.0, -5.0, 5.0]
           rot:   [0.0, 180, 0.0]
           scale: [2.5, 2.5, 2.5]
       actor_1:
-        animation_type: lady_walking
+        animation_type: man_running
         object2scenario: 
-          pos:   [-4.0, 1.0, 1.0]
+          pos:   [-4.0, 0.0, 3.0]
           rot:   [0.0, -90, 0.0]
           scale: [2.5, 2.5, 2.5]
       
 
   static_objects:
-    is_activated: True
+    is_activated: False
     scenario2world: 
       pos:   [0.0, -5.0, 0.0]
       rot:   [0.0, 0.0, 0.0]
