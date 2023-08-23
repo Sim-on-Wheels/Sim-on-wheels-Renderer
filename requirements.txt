@@ -10,3 +10,4 @@ opencv-python
 trimesh
 matplotlib
 pywavefront
+jupyter

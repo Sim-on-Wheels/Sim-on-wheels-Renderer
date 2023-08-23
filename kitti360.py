@@ -31,7 +31,7 @@ from omegaconf import OmegaConf, DictConfig, ListConfig
 from matplotlib import pyplot as plt
 
 config_path = 'configs/kitti360.yaml'
-data_root = 'kitti360'
+data_root = 'sample_kitti360_frames'
 
 class HIL_rendering(mglw.WindowConfig):
     gl_version = (3, 3)
