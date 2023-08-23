@@ -230,10 +230,24 @@ def show_array(array):
     plt.imshow(array)
     plt.show()
     plt.close()
+class EglHeadlessWindow(mglw.get_local_window_cls('headless')):
+    name = "egl-headless"
 
+    def init_mgl_context(self) -> None:
+        """Create an standalone context and framebuffer"""
+        self._ctx = mgl.create_standalone_context(
+            require=self.gl_version_code,
+            backend="egl",
+        )
+        self._fbo = self.ctx.framebuffer(
+            color_attachments=self.ctx.texture(self.size, 4, samples=self._samples),
+            depth_attachment=self.ctx.depth_texture(self.size, samples=self._samples),
+        )
+        self.use()
 def setup_window_config(config_cls: mglw.WindowConfig, values: Namespace, using_ros: bool, custom_config):
     mglw.setup_basic_logging(config_cls.log_level)
-    window_cls = mglw.get_local_window_cls(values.window)
+    # Using Egl window just for colab
+    window_cls = EglHeadlessWindow #mglw.get_local_window_cls(values.window)
 
     # Calculate window size
     size = values.size or custom_config.window_size
@@ -256,9 +270,11 @@ def setup_window_config(config_cls: mglw.WindowConfig, values: Namespace, using_
         vsync=values.vsync if values.vsync is not None else config_cls.vsync,
         samples=values.samples if values.samples is not None else config_cls.samples,
         cursor=show_cursor if show_cursor is not None else True,
+        backend='egl'
     )
     window.print_context_info()
-    mglw.activate_context(window=window)
+    ctx = mgl.create_context(standalone=True, backend='egl')
+    mglw.activate_context(window=window, ctx=ctx)
 
     timer = mglw.Timer()
     config_obj = config_cls(using_ros, custom_config, ctx=window.ctx, wnd=window, timer=timer)
