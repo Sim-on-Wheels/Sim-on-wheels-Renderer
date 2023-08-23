@@ -103,14 +103,14 @@ class HIL_rendering(mglw.WindowConfig):
             scenario.update()
         for scenario in self.scenarios:
             scenario.render()
-        img_gt = self.take_screenshot()
-        img_gt.save(os.path.join(dir_origin, '{:0>5d}.png'.format(self.dataloader.start_frame + self.i)))
+        # img_gt = self.take_screenshot()
+        # img_gt.save(os.path.join(dir_origin, '{:0>5d}.png'.format(self.dataloader.start_frame + self.i)))
         self.ctx.clear(0, 0, 0)
         self.offscreen.clear()
         self.wnd.use()
         self.background.render()
-        # img_origin = self.take_screenshot()
-        # img_origin.save(os.path.join(dir_origin, '{:0>5d}.png'.format(self.i)))
+        img_origin = self.take_screenshot()
+        img_origin.save(os.path.join(dir_origin, '{:0>5d}.png'.format(self.i)))
 
         for scenario in self.scenarios:
             scenario.render()
@@ -151,7 +151,7 @@ class HIL_rendering(mglw.WindowConfig):
         return None
 
     def render_folders(self):
-        dir_origin = os.path.join('outputs/kitti360/', self.config.name, 'gt')
+        dir_origin = os.path.join('outputs/kitti360/', self.config.name, 'origin')
         dir_insert = os.path.join('outputs/kitti360/', self.config.name, 'insert')
         os.makedirs(dir_origin, exist_ok=True)
         os.makedirs(dir_insert, exist_ok=True)
@@ -246,7 +246,6 @@ class EglHeadlessWindow(mglw.get_local_window_cls('headless')):
         self.use()
 def setup_window_config(config_cls: mglw.WindowConfig, values: Namespace, using_ros: bool, custom_config):
     mglw.setup_basic_logging(config_cls.log_level)
-    # Using Egl window just for colab
     window_cls = EglHeadlessWindow #mglw.get_local_window_cls(values.window)
 
     # Calculate window size
@@ -270,7 +269,6 @@ def setup_window_config(config_cls: mglw.WindowConfig, values: Namespace, using_
         vsync=values.vsync if values.vsync is not None else config_cls.vsync,
         samples=values.samples if values.samples is not None else config_cls.samples,
         cursor=show_cursor if show_cursor is not None else True,
-        backend='egl'
     )
     window.print_context_info()
     ctx = mgl.create_context(standalone=True, backend='egl')
