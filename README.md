@@ -60,3 +60,16 @@ python main.py
 ```
 
 We provide different scenario configs examples in configs folder. You can load different config by changing config directory path in main.py:33. Our config yaml file can specify trigger distance condition, actor types, scenario types, and lighting related hyperparamters. 
+
+### Citation
+Please cite us if you use any part of our work:
+```
+@misc{shen2023simonwheels,
+      title={Sim-on-Wheels: Physical World in the Loop Simulation for Self-Driving}, 
+      author={Yuan Shen and Bhargav Chandaka and Zhi-hao Lin and Albert Zhai and Hang Cui and David Forsyth and Shenlong Wang},
+      year={2023},
+      eprint={2306.08807},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO}
+}
+```
