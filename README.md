@@ -1,4 +1,5 @@
 # Sim-on-Wheels: Physical World in the Loop Simulation for Self-Driving (Renderer)
+This is an official repo for the paper titled "Sim-on-Wheels: Physical World in the Loop Simulation for Self-Driving", RAL 2023
 
 [Yuan Shen<sup>*</sup>](https://yshen47.github.io/),
 [Bhargav Chandaka<sup>*</sup>](https://bchandaka.github.io),
@@ -64,12 +65,14 @@ We provide different scenario configs examples in configs folder. You can load d
 ### Citation
 Please cite us if you use any part of our work:
 ```
-@misc{shen2023simonwheels,
-      title={Sim-on-Wheels: Physical World in the Loop Simulation for Self-Driving}, 
-      author={Yuan Shen and Bhargav Chandaka and Zhi-hao Lin and Albert Zhai and Hang Cui and David Forsyth and Shenlong Wang},
-      year={2023},
-      eprint={2306.08807},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO}
+@inproceedings{shen2023simonwheels,
+  author={Shen, Yuan and Chandaka, Bhargav and Lin, Zhi-Hao and Zhai, Albert and Cui, Hang and Forsyth, David and Wang, Shenlong},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={Sim-on-Wheels: Physical World in the Loop Simulation for Self-Driving}, 
+  year={2023},
+  volume={8},
+  number={12},
+  pages={8192-8199},
+  doi={10.1109/LRA.2023.3325689}
 }
 ```
